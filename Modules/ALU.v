@@ -1,19 +1,20 @@
 module ALU #(
-parameter WIDTH = 32
+parameter ALUResult = 32 ,
+          ALU_Control_width = 3
 ) (
-input	wire	[WIDTH-1:0]		SrcA,
-input	wire	[WIDTH-1:0]		SrcB,
-input	wire	[2:0]			ALUControl,
+input	wire	[ALUResult-1:0]		                SrcA,
+input	wire	[ALUResult-1:0]		                SrcB,
+input	wire	[ALU_Control_width-1:0]			    ALUControl,
 
-output	reg		[WIDTH-1:0]		ALUResult,
+output	reg		[ALUResult-1:0]		                ALUResult
 );
 
-localparam [2:0] And = 3'b000;
-localparam [2:0] Or  = 3'b001;
-localparam [2:0] add = 3'b010;
-localparam [2:0] sub = 3'b100;
-localparam [2:0] mul = 3'b101;
-localparam [2:0] slt = 3'b110;
+localparam [ALU_Control_width-1:0]      And = 'b000;
+localparam [ALU_Control_width-1:0]      Or  = 'b001;
+localparam [ALU_Control_width-1:0]      add = 'b010;
+localparam [ALU_Control_width-1:0]      sub = 'b100;
+localparam [ALU_Control_width-1:0]      mul = 'b101;
+localparam [ALU_Control_width-1:0]      slt = 'b110;
 
 
 always @(*)
