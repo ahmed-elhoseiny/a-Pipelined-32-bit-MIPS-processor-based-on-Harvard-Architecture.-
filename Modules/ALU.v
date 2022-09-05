@@ -6,7 +6,6 @@ input	wire	[WIDTH-1:0]		SrcB,
 input	wire	[2:0]			ALUControl,
 
 output	reg		[WIDTH-1:0]		ALUResult,
-output	wire					Zero
 );
 
 localparam [2:0] And = 3'b000;
