@@ -7,7 +7,7 @@ output       wire       [WIDTH-1:0]      out
 );
 
 
-assign out = (sel==1'b0) ? In1 : In2 ;
+assign out = (sel == 1'b0) ? In1 : In2 ;
 
 //always @(*) 
 //begin
