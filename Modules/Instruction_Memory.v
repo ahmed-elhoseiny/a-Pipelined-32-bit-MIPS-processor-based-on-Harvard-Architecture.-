@@ -3,16 +3,12 @@ parameter WIDTH = 32 ,
           DEPTH = 100
 ) (
 input  wire     [WIDTH-1:0]		    A,
-output reg      [WIDTH-1:0] 	    RD
+output wire      [WIDTH-1:0] 	    RD
 );
 
 reg [WIDTH-1:0] ROM [0:DEPTH-1];
 
-always @(*) 
-begin
-    RD = ROM [A>>2];
-end
-
+assign  RD = ROM [A>>2];
 
 initial 
 begin
