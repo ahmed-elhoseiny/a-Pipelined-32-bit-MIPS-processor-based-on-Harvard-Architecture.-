@@ -3,17 +3,16 @@ parameter WIDTH =32 ,
           DEPTH =100 ,
           Test_Value_width =16 ,
 ) (
-input     wire  [WIDTH-1:0]            A,
-input     wire  [WIDTH-1:0]            WD,
-input     wire                         WE,
-input     wire                         CLK,RST,
+input     wire   [WIDTH-1:0]            A,
+input     wire   [WIDTH-1:0]            WD,
+input     wire                          WE,
+input     wire                          CLK,RST,
 
-output    wire  [WIDTH-1:0]            RD,
-output    reg   [Test_Value_width-1:0] Test_Value
+output    wire   [WIDTH-1:0]            RD,
+output    wire   [Test_Value_width-1:0] Test_Value
 );
     
 reg		[WIDTH-1:0] 	RAM		[0:DEPTH-1] ;
-reg     [WIDTH-1:0]     ADDR_0 ;
 
 integer k ;
 
