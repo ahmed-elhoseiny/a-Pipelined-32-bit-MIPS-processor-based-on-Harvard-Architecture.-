@@ -20,14 +20,17 @@ input       wire                              RegWriteW,
 input       wire    [WriteReg_width-1:0]      WriteRegW,
 input       wire                              MemtoRegE,
 
-output      reg     [ForwardAE_width-1:0]    ForwardAE,
-output      reg     [ForwardBE_width-1:0]    ForwardBE,
-output      reg                              FlushE,
-output      reg                              ForwardAD,
-output      reg                              ForwardBD,
-output      reg                              StallF,
-output      reg                              StallD
+output      reg     [ForwardAE_width-1:0]     ForwardAE,
+output      reg     [ForwardBE_width-1:0]     ForwardBE,
+output      wire                              FlushE,
+output      wire                              ForwardAD,
+output      wire                              ForwardBD,
+output      wire                              StallF,
+output      wire                              StallD
 );
+
+wire                lwstall;
+
 
 always @(*) begin
     if ((RsE != 0) && (RsE == WriteRegM) && RegWriteM) begin
@@ -48,4 +51,13 @@ always @(*) begin
         ForwardBE = 'b00 ;    
     end
 end
+
+assign lwstall = ((RsD == RtE) || (RtD == RtE)) && MemtoRegE;
+// assign StallF = StallD= FlushE= lwstall
+
+assign ForwardAD = (RsD != 0) && (RsD == WriteRegM) && RegWriteM;
+assign ForwardBD = (RtD != 0) && (RtD == WriteRegM) && RegWriteM;
+assign branchstall = BranchD && RegWriteE && (WriteRegE == rsD OR WriteRegE == rtD) || BranchD && MemtoRegM && ((WriteRegM == rsD) || (WriteRegM == rtD));
+// assign FlushE = lwstall OR branchstall OR JumpD;
+// assign StallF = StallD = FlushE = lwstall OR branchstall;
 endmodule
