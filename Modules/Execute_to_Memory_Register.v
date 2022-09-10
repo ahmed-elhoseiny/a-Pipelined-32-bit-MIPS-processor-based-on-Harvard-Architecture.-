@@ -20,8 +20,8 @@ output reg      [WriteData_width-1:0]        WriteDataM,
 output reg      [WriteReg_width-1:0]         WriteRegM
 );
 
-reg [3+ALUOut_width+WriteData_width+WriteReg_width-1:0]    OUT_s;
-reg [3+ALUOut_width+WriteData_width+WriteReg_width-1:0]    IN_s;
+reg  [3+ALUOut_width+WriteData_width+WriteReg_width-1:0]    OUT_s;
+wire [3+ALUOut_width+WriteData_width+WriteReg_width-1:0]    IN_s;
 
 assign  {RegWriteM, MemtoRegM, MemWriteM, ALUOutM, WriteDataM, WriteRegM} = OUT_s ;
 assign  IN_s = {RegWriteE, MemtoRegE, MemWriteE, ALUOutE, WriteDataE, WriteRegE} ;
