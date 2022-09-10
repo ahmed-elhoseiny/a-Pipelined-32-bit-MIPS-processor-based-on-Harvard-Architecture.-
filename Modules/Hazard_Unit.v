@@ -30,7 +30,7 @@ output      wire                              StallD
 );
 
 wire                lwstall;
-
+wire                branchstall;
 
 always @(*) begin
     if ((RsE != 0) && (RsE == WriteRegM) && RegWriteM) begin
@@ -57,7 +57,7 @@ assign lwstall = ((RsD == RtE) || (RtD == RtE)) && MemtoRegE;
 
 assign ForwardAD = (RsD != 0) && (RsD == WriteRegM) && RegWriteM;
 assign ForwardBD = (RtD != 0) && (RtD == WriteRegM) && RegWriteM;
-assign branchstall = BranchD && RegWriteE && (WriteRegE == rsD OR WriteRegE == rtD) || BranchD && MemtoRegM && ((WriteRegM == rsD) || (WriteRegM == rtD));
-// assign FlushE = lwstall OR branchstall OR JumpD;
-// assign StallF = StallD = FlushE = lwstall OR branchstall;
+assign branchstall = BranchD && RegWriteE && (WriteRegE == RsD OR WriteRegE == RtD) || BranchD && MemtoRegM && ((WriteRegM == RsD) || (WriteRegM == RtD));
+assign FlushE = lwstall || branchstall || JumpD;
+assign StallF = StallD = FlushE = lwstall || branchstall;
 endmodule
