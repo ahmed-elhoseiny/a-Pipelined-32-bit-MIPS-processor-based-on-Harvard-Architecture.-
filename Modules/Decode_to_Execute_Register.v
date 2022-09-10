@@ -1,4 +1,4 @@
-module Decode_to_Execute_Resister #(
+module Decode_to_Execute_Register #(
 parameter ALU_Control_width = 3 ,
           Rs_width = 5 ,
           Rt_width = 5 ,
