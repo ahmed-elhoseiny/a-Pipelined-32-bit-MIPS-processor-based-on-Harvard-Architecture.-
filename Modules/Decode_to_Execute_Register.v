@@ -37,7 +37,7 @@ reg [ALU_Control_width+5+2*WIDTH+Rs_width+Rt_width+Rd_width+SignImm_width-1:0]  
 reg [ALU_Control_width+5+2*WIDTH+Rs_width+Rt_width+Rd_width+SignImm_width-1:0]    IN_s;
 
 assign  {ALUControlE, RegWriteE, MemtoRegE, MemWriteE, RegDstE, ALUSrcE, RD1_E, RD2_E, RsE, RtE, RdE, SignImmE} = OUT_s ;
-assign  {ALUControlD, RegWriteD, MemtoRegD, MemWriteD, RegDstD, ALUSrcD, RD1_D, RD2_D, RsD, RtD, RdD, SignImmD} = IN_s ;
+assign  IN_s = {ALUControlD, RegWriteD, MemtoRegD, MemWriteD, RegDstD, ALUSrcD, RD1_D, RD2_D, RsD, RtD, RdD, SignImmD} ;
 
 
 always @(posedge CLK or negedge RST) begin
@@ -45,7 +45,7 @@ always @(posedge CLK or negedge RST) begin
     OUT_s <= 'd0;
    end else if (CLR) begin
     OUT_s <= 'd0;
-   end else if (!EN && CLR) begin
+   end else begin
     OUT_s <= IN_s;
    end
 end
