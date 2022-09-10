@@ -1,12 +1,12 @@
 module ALU #(
-parameter ALUResult = 32 ,
+parameter ALUResult_width = 32 ,
           ALU_Control_width = 3
 ) (
-input	wire	[ALUResult-1:0]		                SrcA,
-input	wire	[ALUResult-1:0]		                SrcB,
+input	wire	[ALUResult_width-1:0]		        SrcA,
+input	wire	[ALUResult_width-1:0]		        SrcB,
 input	wire	[ALU_Control_width-1:0]			    ALUControl,
 
-output	reg		[ALUResult-1:0]		                ALUResult
+output	reg		[ALUResult_width-1:0]		        ALUResult
 );
 
 localparam [ALU_Control_width-1:0]      And = 'b000;
