@@ -1,11 +1,11 @@
 module Program_Counter #(
-parameter PC_in_width = 32,
+parameter PC_in_width = 32 ,
           PC_out_width = 32
 ) (
-input   wire                              CLK,
-input   wire                              RST,
-input   wire                              EN,
-input	wire	[PC_in_width-1:0]		  PC_in,
+input   wire                            CLK,
+input   wire                            RST,
+input   wire                            EN,
+input	  wire	  [PC_in_width-1:0]		    PC_in,
 
 output  reg     [PC_out_width-1:0]		  PC_out
 );

@@ -1,5 +1,5 @@
 module Sign_Extend #(
-parameter Extend_width = 32, 
+parameter Extend_width = 32 , 
           Imm_width = 16
 ) (
 input    wire     [Imm_width-1:0]           Imm,

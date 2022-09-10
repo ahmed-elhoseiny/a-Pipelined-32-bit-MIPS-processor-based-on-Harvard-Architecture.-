@@ -1,6 +1,6 @@
 module Main_Decoder #(
 parameter Opcode_width = 6 ,
-          ALU_OP_width = 2 ,  
+          ALU_OP_width = 2   
 ) (
 input   wire    [Opcode_width-1:0]    Opcode,
 

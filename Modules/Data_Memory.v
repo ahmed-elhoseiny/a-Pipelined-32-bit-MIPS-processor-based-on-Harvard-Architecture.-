@@ -1,7 +1,7 @@
 module Data_Memory #(
 parameter WIDTH =32 ,
           DEPTH =100 ,
-          Test_Value_width =16 ,
+          Test_Value_width =16 
 ) (
 input     wire   [WIDTH-1:0]            A,
 input     wire   [WIDTH-1:0]            WD,

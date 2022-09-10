@@ -1,5 +1,5 @@
 module Fetch_to_Decode_Register #(
-parameter Instr_width = 32,
+parameter Instr_width = 32 ,
           PCPlus4_width = 32
 ) (
 input wire                                CLK;

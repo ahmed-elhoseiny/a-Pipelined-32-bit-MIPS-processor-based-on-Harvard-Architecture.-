@@ -1,7 +1,7 @@
 module Register_File #(
-parameter WIDTH =32,
-          DEPTH =100, 
-          REG_ADDR=5
+parameter WIDTH = 32 ,
+          DEPTH = 100 , 
+          REG_ADDR= 5
 ) ( 
 input	wire	[REG_ADDR-1:0]		A1,
 input	wire	[REG_ADDR-1:0]		A2,

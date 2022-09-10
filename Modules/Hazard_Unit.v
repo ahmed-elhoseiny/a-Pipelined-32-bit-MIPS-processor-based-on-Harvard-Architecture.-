@@ -1,8 +1,8 @@
 module Hazard_Unit #(
-parameter Rs_width = 5,
-          Rt_width = 5,
-          WriteReg_width = 5,
-          ForwardAE_width = 2,
+parameter Rs_width = 5 ,
+          Rt_width = 5 ,
+          WriteReg_width = 5 ,
+          ForwardAE_width = 2 ,
           ForwardBE_width =2
 ) (
 

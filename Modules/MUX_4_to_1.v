@@ -1,6 +1,6 @@
 module MUX_4_to_1 #(
-parameter IN_WIDTH  =32,
-          OUT_WIDTH =32, 
+parameter IN_WIDTH  =32 ,
+          OUT_WIDTH =32 , 
           sel_WIDTH =2 
 ) (
 input        wire       [IN_WIDTH-1:0]   In1,
