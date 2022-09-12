@@ -4,8 +4,8 @@ parameter   Funct_width = 6 ,
             ALU_Control_width = 3 ,
             ALU_OP_width = 2
 ) (
-input wire [Opcode_width-1:0]       Opcode,
-input wire [Funct_width-1:0]        Funct,
+input wire  [Opcode_width-1:0]      Opcode,
+input wire  [Funct_width-1:0]       Funct,
 
 output wire                         RegWrite,
 output wire                         MemtoReg,
