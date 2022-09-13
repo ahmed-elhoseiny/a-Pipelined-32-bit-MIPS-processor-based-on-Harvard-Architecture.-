@@ -54,23 +54,23 @@ wire     [shifted_Instr_0to25_width-1:0] shifted_Instr_0to25;
 wire                                     Add_BranchD_and_EqualD;      
 
 Control_Unit #(
-            .Funct_width(),
-            .Opcode_width(),  
-            .ALU_Control_width(),
-            .ALU_OP_width ()
+            .Funct_width(6),
+            .Opcode_width(6),  
+            .ALU_Control_width(ALU_Control_width),
+            .ALU_OP_width (2)
             ) Control_Unit_U1
 (
-.Opcode(),
-.Funct(),
+.Opcode(InstrD[31:26]),
+.Funct(InstrD[5:0]),
 
-.RegWrite(),
-.MemtoReg(),
-.MemWrite(),
-.ALUControl(),
-.ALUSrc(),
-.RegDst(),
-.Jump(),
-.Branch()
+.RegWrite(RegWriteD),
+.MemtoReg(MemtoRegD),
+.MemWrite(MemWriteD),
+.ALUControl(ALUControlD),
+.ALUSrc(ALUSrcD),
+.RegDst(RegDstD),
+.Jump(JumpD),
+.Branch(BranchD)
 );
 
 AND_gate     AND_gate_BranchD_EqualD_U1
