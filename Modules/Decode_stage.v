@@ -131,10 +131,34 @@ Register_File #(
 .RD2()
 );
 
+Sign_Extend #(
+            .Extend_width(), 
+            .Imm_width()
+             )   Sign_Extend_SignImmD_U1
+(
+.Imm(),
+.SignImm()
+);
 
 
+shift_left_twice #(
+                    .IN_width(),
+                    .OUT_width()
+                  )  shift_left_twice_SignImmD_U1
+(
+.IN(),
+.OUT()
+);
 
 
+shift_left_twice #(
+                    .IN_width(),
+                    .OUT_width()
+                  )  shift_left_Instr_0to25_U1
+(
+.IN(),
+.OUT()
+);
 
 
 endmodule
