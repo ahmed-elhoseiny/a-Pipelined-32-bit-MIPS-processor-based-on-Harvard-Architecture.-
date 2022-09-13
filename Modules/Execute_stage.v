@@ -1,4 +1,4 @@
-module moduleName #(
+module Execute_stage  #(
 parameter ALU_Control_width = 3,
           WIDTH = 32 ,
           Rs_width = 5 ,
