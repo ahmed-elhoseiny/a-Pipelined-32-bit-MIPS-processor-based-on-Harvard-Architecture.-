@@ -8,7 +8,7 @@ input	wire	[REG_ADDR-1:0]		A2,
 input	wire	[REG_ADDR-1:0]		A3,
 input	wire						WE3,
 input	wire	[WIDTH-1:0]			WD3,
-input                               CLK,RST,
+input   wire                        CLK,RST,
 output  wire    [WIDTH-1:0]         RD1,RD2
 );
     
