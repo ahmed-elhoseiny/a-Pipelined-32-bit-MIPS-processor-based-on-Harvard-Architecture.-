@@ -43,7 +43,8 @@ output wire         [WIDTH-1:0]                  RD1_D, RD2_D,
 output wire         [Rs_width-1:0]               RsD,
 output wire         [Rt_width-1:0]               RtD,
 output wire         [Rd_width-1:0]               RdD,
-output wire         [SignImm_width-1:0]          SignImmD
+output wire         [SignImm_width-1:0]          SignImmD,
+output wire  [shifted_Instr_0to25_width+4-1:0]   PCJumpD
 );
 
 wire                                     EqualD;
@@ -81,7 +82,6 @@ AND_gate     AND_gate_BranchD_EqualD_U1
 .out(Add_BranchD_and_EqualD)
 );
 
-assign PCSrcD = {JumpD , Add_BranchD_and_EqualD};
 
 OR_gate      OR_gate_PCSrcD_0_1_U1
 (
@@ -158,6 +158,14 @@ shift_left_twice #(
 .OUT(shifted_SignImmD)
 );
 
+Adder #(.WIDTH(PCBranch_width) )  Adder_PCPlus4D_U1
+(
+.IN_1(shifted_SignImmD),
+.IN_2(PCPlus4D),
+
+.OUT(PCBranchD)
+);
+
 
 shift_left_twice #(
                     .IN_width(shifted_Instr_0to25_width),
@@ -168,5 +176,7 @@ shift_left_twice #(
 .OUT(shifted_Instr_0to25)
 );
 
+assign PCSrcD = {JumpD , Add_BranchD_and_EqualD};
+assign PCJumpD = {PCBranchD[31:28] , shifted_Instr_0to25};
 
 endmodule
