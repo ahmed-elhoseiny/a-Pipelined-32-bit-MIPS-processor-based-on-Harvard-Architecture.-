@@ -102,7 +102,7 @@ comparator #(
 .out_signal(EqualD)
 );
 
-MUX_2_to_1 #(.WIDTH(WIDTH)) MUX_2_to_1_RD1_U1
+MUX_2_to_1 #(.WIDTH(WIDTH)) MUX_2_to_1_RD1D_U1
 (
 .In1(RD1_D),
 .In2(ALUOutM),
@@ -111,7 +111,7 @@ MUX_2_to_1 #(.WIDTH(WIDTH)) MUX_2_to_1_RD1_U1
 .out(MUX_D_RD1_or_ALUOutM)
 );
 
-MUX_2_to_1 #(.WIDTH(WIDTH)) MUX_2_to_1_RD2_U2
+MUX_2_to_1 #(.WIDTH(WIDTH)) MUX_2_to_1_RD2D_U2
 (
 .In1(RD2_D),
 .In2(ALUOutM),
