@@ -37,7 +37,7 @@ output wire                                      RegDstD,
 output wire                                      JumpD,
 output wire                                      BranchD,
 output wire         [PCSrcD_width-1:0]           PCSrcD,
-output wire                                      OR_PCSrcD_0or1;
+output wire                                      OR_PCSrcD_0or1,
 output wire         [PCBranch_width-1:0]         PCBranchD,
 output wire         [WIDTH-1:0]                  RD1_D, RD2_D,
 output wire         [Rs_width-1:0]               RsD,
