@@ -1,6 +1,7 @@
 module Memory_to_Writeback_Register #(
 parameter ReadDat_width = 32 ,
           ALUOut_width = 32 ,
+          WriteReg_width = 5
 ) (
 input wire                                   CLK,
 input wire                                   RST,
