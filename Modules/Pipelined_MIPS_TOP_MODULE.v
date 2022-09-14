@@ -39,23 +39,269 @@ Hazard_Unit #(
 
 
 Fetch_stage #(
-parameter PCPlus4_width = 32 ,
-          PCSrcD_width = 2 ,
-          Instr_width = 32 ,
-          PCBranch_width = 32 ,
-          PCJump_width = 32 ,
-          PC_in_width = 32 ,
-          PCF_width = 32
-) (
-input wire                                 CLK,
-input wire                                 RST,
-input wire      [PCSrcD_width-1:0]         PCSrcD,
-input wire      [PCBranch_width-1:0]       PCBranchD,
-input wire      [PCJump_width-1:0]         PCJump,
-input wire                                 StallF,
+                .PCPlus4_width(),
+                .PCSrcD_width(),
+                .Instr_width(),
+                .PCBranch_width(),
+                .PCJump_width(),
+                .PC_in_width(),
+                .PCF_width()
+             )         Fetch_stage_U1
+(
+.CLK(),
+.RST(),
+.PCSrcD(),
+.PCBranchD(),
+.PCJump(),
+.StallF(),
 
-output wire     [PCPlus4_width-1:0]        PCPlus4F,    
-output wire     [Instr_width-1:0]          InstrF 
+.PCPlus4F(),    
+.InstrF() 
 );
+
+
+Fetch_to_Decode_Register #(
+                            .Instr_width(),
+                            .PCPlus4_width()
+                          )   Fetch_to_Decode_Register_U1
+(
+.CLK(),
+.RST(),
+.CLR(),
+.EN(),
+.InstrF(),
+.PCPlus4F(),
+
+.InstrD(),
+.PCPlus4D()
+);
+
+
+Decode_stage #(
+                .Instr_width(),
+                .PCPlus4_width(),
+                .PCBranch_width(),
+                .WriteReg_width(),
+                .Result_width(),
+                .ALU_Control_width(),
+                .PCSrcD_width(),
+                .ALUOut_width(),
+                .WIDTH(),
+                .Rs_width(),
+                .Rt_width(),
+                .Rd_width(),
+                .SignImm_width(),
+                .shifted_SignImmD_width(),
+                .shifted_Instr_0to25_width()
+              )      Decode_stage_U1
+(
+.CLK(), 
+.RST(),
+.InstrD(), 
+.PCPlus4D(),
+.WriteRegW(),
+.RegWriteW(),
+.ForwardAD(),
+.ForwardBD(),
+.ResultW(),
+.ALUOutM(),
+
+.RegWriteD(),
+.MemtoRegD(),
+.MemWriteD(),
+.ALUControlD(),
+.ALUSrcD(),
+.RegDstD(),
+.JumpD(),
+.BranchD(),
+.PCSrcD(),
+.OR_PCSrcD_0or1(),
+.PCBranchD(),
+.RD1_D(), 
+.RD2_D(),
+.RsD(),
+.RtD(),
+.RdD(),
+.SignImmD(),
+.PCJumpD()
+);
+
+
+
+Decode_to_Execute_Register #(
+                                .ALU_Control_width(),
+                                .Rs_width(),
+                                .Rt_width(),
+                                .Rd_width(),
+                                .WIDTH(),
+                                .SignImm_width()
+                            )  Decode_to_Execute_Register_U1
+(
+.CLK(), 
+.RST(), 
+.CLR(),
+.MemWriteD(),
+.MemtoRegD(),
+.ALUControlD(),
+.ALUSrcD(),
+.RegWriteD(),
+.RegDstD(),
+.RD1_D(), 
+.RD2_D(),
+.RsD(), 
+.RtD(),
+.RdD(),
+.SignImmD(),
+
+.ALUControlE(),
+.RegWriteE(), 
+.MemtoRegE(),
+.MemWriteE(),
+.RegDstE(),
+.ALUSrcE(),
+.RD1_E(), 
+.RD2_E(),
+.RsE(),
+.RtE(),
+.RdE(),
+.SignImmE()
+);
+
+
+Execute_stage  #(
+                    .ALU_Control_width(),
+                    .WIDTH(),
+                    .Rs_width(),
+                    .Rt_width(),
+                    .Rd_width(),
+                    .SignImm_width(),
+                    .Result_width(),
+                    .ALUOut_width(),
+                    .ForwardAE_width(),
+                    .ForwardBE_width(),
+                    .WriteData_width(),
+                    .WriteReg_width(),
+                )   Execute_stage_U1
+(
+.ALUControlE(),
+.RegWriteE(),
+.MemtoRegE(),
+.MemWriteE(),
+.RegDstE(),
+.ALUSrcE(),
+.RD1_E(),
+.RD2_E(),
+.RsE(),
+.RdE(),
+.RtE(),
+.SignImmE(),
+.ResultW(),
+.ALUOutM(),
+.ForwardAE(),
+.ForwardBE(),
+
+.RegWriteE(),
+.MemtoRegE(),
+.MemWriteE(),
+.ALUOutE(),
+.WriteDataE(),
+.WriteRegE()
+);
+
+
+
+Execute_to_Memory_Register #(
+                                .ALUOut_width(),
+                                .WriteData_width(),
+                                .WriteReg_width()
+                            )    Execute_to_Memory_Register_U1   
+(
+.CLK(),
+.RST(),
+.RegWriteE(),
+.MemtoRegE(),
+.MemWriteE(),
+.ALUOutE(),
+.WriteDataE(),
+.WriteRegE(),
+
+.RegWriteM(),
+.MemtoRegM(),
+.MemWriteM(),
+.ALUOutM(),
+.WriteDataM(),
+.WriteRegM()
+);
+
+
+
+Memory_stage #(
+                .ALUOut_width(),
+                .WriteData_width(),
+                .WriteReg_width(),
+                .ReadDat_width(),
+                .Test_Value_width()
+              )   Memory_stage_U1
+(
+.RegWriteM(),
+.MemtoRegM(),
+.MemWriteM(),
+.CLK(), 
+.RST(),
+.ALUOutM(),
+.WriteDataM(),
+.WriteRegM(),
+
+.RegWriteM(),
+.MemtoRegM(),
+.MemWriteM(),
+.ReadDataM(),
+.ALUOutM(),
+.WriteRegM(),
+.Test_Value_M()
+);
+
+
+Memory_to_Writeback_Register #(
+                                .ReadDat_width(),
+                                .ALUOut_width(),
+                                .WriteReg_width()
+                              )   Memory_to_Writeback_Register_U1
+(
+.CLK(),
+.RST(),
+.RegWriteM(),
+.MemtoRegM(),
+.ReadDataM(),
+.ALUOutM(),
+.WriteRegM(),
+
+.RegWriteW(),
+.MemtoRegW(),
+.ReadDataW(),
+.ALUOutW(),
+.WriteRegW()
+);
+
+
+
+Writeback_stage #(
+                    .ReadDat_width(),
+                    .ALUOut_width(),
+                    .WriteReg_width(),
+                    .Result_width()
+                 )   Writeback_stage_U1
+(
+.RegWriteW(),
+.MemtoRegW(),
+.ALUOutW(),
+.ReadDataW(),
+.WriteRegW(),
+
+.WriteRegW(),
+.ResultW(),
+.RegWriteW()
+);
+
 
 endmodule
