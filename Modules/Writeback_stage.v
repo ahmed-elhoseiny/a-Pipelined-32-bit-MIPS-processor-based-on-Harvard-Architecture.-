@@ -16,7 +16,7 @@ output wire     [Result_width-1:0]                  ResultW,
 input wire                                          RegWriteW
 );
 
-MUX_2_to_1 #(.WIDTH(Result_width)) MUX_2to1_SrcBE_U1
+MUX_2_to_1 #(.WIDTH(Result_width)) MUX_2to1_ResultW_U1
 (
 .In1(ReadDataW),
 .In2(ALUOutW),
